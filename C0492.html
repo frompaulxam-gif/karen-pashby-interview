@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Professor Karen Pashby — Global Citizenship Education — Part 1</title>
+<style>
+  :root { --bg:#0f1117; --panel:#171a23; --line:#1f2330; --hi:#2a3350;
+           --txt:#e7e9ee; --mut:#9aa3b2; --accent:#6ea8fe; --q:#7ee0c0; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt);
+         font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  header { padding:18px 22px 6px; max-width:980px; margin:0 auto; }
+  h1 { font-size:20px; margin:0 0 2px; }
+  .sub { color:var(--mut); font-size:13px; }
+  .nav { max-width:980px; margin:0 auto; padding:0 22px; font-size:13px; }
+  .nav a { color:var(--accent); text-decoration:none; }
+  .wrap { display:flex; flex-direction:column; gap:0; max-width:980px; margin:0 auto;
+          padding:0 16px 60px; }
+  .videobox { position:sticky; top:0; z-index:5; background:var(--bg); padding:8px 0 10px; }
+  video { width:100%; border-radius:12px; background:#000; max-height:58vh; }
+  .controls { display:flex; gap:8px; align-items:center; margin:8px 2px 2px; flex-wrap:wrap; }
+  .controls button { background:var(--line); color:var(--txt); border:1px solid #2b3040;
+        border-radius:8px; padding:7px 13px; font-size:13px; cursor:pointer; }
+  .controls button:hover { background:var(--hi); }
+  .controls .on { background:var(--accent); color:#0b0e14; border-color:var(--accent); }
+  .hint { color:var(--mut); font-size:12.5px; }
+  /* Quality segmented switch: two clearly-distinct options */
+  .qual { display:inline-flex; align-items:stretch; border:1px solid #2c4a7a; border-radius:9px;
+          overflow:hidden; background:#0d1626; }
+  .qual .lbl { display:flex; align-items:center; padding:0 9px; font-size:11px; color:var(--mut);
+        text-transform:uppercase; letter-spacing:.04em; border-right:1px solid #22304a; }
+  .qual button { background:transparent; color:var(--mut); border:none; border-radius:0;
+        padding:7px 14px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; }
+  .qual button:hover { background:#16243d; color:var(--txt); }
+  .qual button.sel { background:var(--accent); color:#06101f; }
+  .qual button.sel .tag { opacity:.8; font-weight:600; }
+  .qual .tag { font-size:10px; }
+  .transcript { background:var(--panel); border-radius:12px; overflow:hidden; }
+  .line { display:flex; gap:12px; padding:10px 14px; border-top:1px solid var(--line);
+          scroll-margin-top:62vh; }
+  .line:first-child { border-top:none; }
+  .line:hover { background:#1b1f2b; }
+  .line.active { background:var(--hi); }
+  /* Clickable timestamp 'pill' — NOT selectable, so copying text skips it */
+  .ts { flex:0 0 auto; align-self:flex-start; display:inline-flex; align-items:center; gap:5px;
+        font-variant-numeric:tabular-nums; font-size:12.5px; font-weight:600;
+        color:var(--accent); background:#10213f; border:1px solid #2c4a7a;
+        border-radius:999px; padding:3px 10px 3px 8px; cursor:pointer; font-family:inherit;
+        user-select:none; -webkit-user-select:none; transition:background .12s,border-color .12s; }
+  .ts .play { font-size:9px; opacity:.85; }
+  .ts:hover { background:var(--accent); color:#06101f; border-color:var(--accent); }
+  .line.active .ts { background:var(--accent); color:#06101f; border-color:var(--accent); }
+  .body { flex:1; }
+  .spk { font-weight:700; font-size:12.5px; letter-spacing:.02em;
+         text-transform:uppercase; margin-right:4px; user-select:none; -webkit-user-select:none; }
+  .spk-interviewer { color:var(--accent); }
+  .spk-jonathan { color:var(--q); }
+  .txt { color:var(--txt); -webkit-user-select:text; user-select:text; }
+  a { color:var(--accent); }
+  /* Full-transcript overlay */
+  .overlay { position:fixed; inset:0; background:rgba(6,8,14,.85); z-index:50;
+             display:none; padding:24px; }
+  .overlay.show { display:flex; }
+  .sheet { background:var(--panel); border:1px solid #262b3a; border-radius:14px;
+           max-width:820px; width:100%; margin:auto; max-height:90vh; display:flex; flex-direction:column; }
+  .sheet header { display:flex; align-items:center; justify-content:space-between; gap:10px;
+                  padding:16px 20px; border-bottom:1px solid var(--line); max-width:none; }
+  .sheet h2 { font-size:16px; margin:0; }
+  .sheet .acts { display:flex; gap:8px; }
+  .sheet .acts button { background:var(--line); color:var(--txt); border:1px solid #2b3040;
+        border-radius:8px; padding:7px 13px; font-size:13px; cursor:pointer; }
+  .sheet .acts .primary { background:var(--accent); color:#06101f; border-color:var(--accent); font-weight:600; }
+  .full { padding:18px 22px; overflow:auto; white-space:pre-wrap; line-height:1.7;
+          font-size:15px; -webkit-user-select:text; user-select:text; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Professor Karen Pashby — Global Citizenship Education — Part 1</h1>
+  <div class="sub"></div>
+</header>
+<div class="nav"><a href="index.html">← Back to all parts</a></div>
+<div class="wrap">
+  <div class="videobox">
+    <video id="v" controls preload="metadata" playsinline src="C0492.mp4"></video>
+    <div class="controls">
+      <button id="follow" class="on" onclick="toggleFollow()">Auto-scroll: on</button>
+      <span class="qual" style="display:none">
+        <span class="lbl">Quality</span>
+        <button id="qHD" class="sel" onclick="setQuality(false)">HD <span class="tag">720p</span></button>
+        <button id="q4K" onclick="setQuality(true)">4K <span class="tag">2160p</span></button>
+      </span>
+      <button onclick="openFull()">📄 Full transcript</button>
+      <span class="hint">Click a <strong>blue time pill</strong> to jump there. Select the text to copy it — the times won’t be included.</span>
+    </div>
+  </div>
+  <div class="transcript" id="t">
+<div class="line" data-start="35.00" data-i="0"><button class="ts" onclick="seek(35.00)" title="Jump to 0:35" aria-label="Jump to 0:35"><span class="play">▶</span>0:35</button><div class="body"><span class="spk spk-interviewer">INTERVIEWER:</span> <span class="txt">Hi, I&#x27;m talking to Professor Karen Pashby today about her research interests. So could you tell us a bit more in a nutshell about your research, Karen?</span></div></div>
+<div class="line" data-start="44.00" data-i="1"><button class="ts" onclick="seek(44.00)" title="Jump to 0:44" aria-label="Jump to 0:44"><span class="play">▶</span>0:44</button><div class="body"><span class="spk spk-karen">KAREN:</span> <span class="txt">Sure. You might be familiar, as most people would be, with the Sustainable Development Goals from the United Nations. So they came in after — some of us are old enough to remember the Millennium Development Goals. The Millennium Development Goals focused on action in so-called developing countries, where the Sustainable Development Goals were really meant to be taking action all over the world and all of the UN&#x27;s signatory nations to improve quality of life and sort of tackle these deep inequalities that we face. What we knew from the Millennium Development Goals was that some of the ways we were doing that type of learning in schools was actually reproducing some pretty problematic stereotypes. And we saw a lot of videos exploiting young babies in various contexts, say in Africa, who were seen as in need of help. And the idea was to encourage us all to help. And helping or being charitable in and of itself is not a problem. But when we think about it as educators, what are we teaching young people about their connection to people who have a very different lived experience from them, and how do we use these kinds of media images? And there was an opportunity then in the Sustainable Development Goals for us to try and address that, and to try and ensure schools were having a more complex and ethical way of treating global issues in the classroom.</span></div></div>
+<div class="line" data-start="134.00" data-i="2"><button class="ts" onclick="seek(134.00)" title="Jump to 2:14" aria-label="Jump to 2:14"><span class="play">▶</span>2:14</button><div class="body"><span class="spk spk-interviewer">INTERVIEWER:</span> <span class="txt">Okay, fascinating. And what motivated you particularly to do this work?</span></div></div>
+<div class="line" data-start="137.00" data-i="3"><button class="ts" onclick="seek(137.00)" title="Jump to 2:17" aria-label="Jump to 2:17"><span class="play">▶</span>2:17</button><div class="body"><span class="spk spk-karen">KAREN:</span> <span class="txt">Well, I was a secondary school teacher. I was trained in Quebec. I worked in Northern Quebec. I worked in Toronto at a school with 46 home languages. And then, similar to you, I taught in an international school in Brazil. And then I decided to go back and do my master&#x27;s. And while I was doing my master&#x27;s, I accessed some critical theory and concepts and languages that really helped me to make sense of those deep tensions that we feel in the classroom as a teacher when we&#x27;re trying to handle some of these really important global issues. And that&#x27;s when I kind of got started looking at global citizenship education, which is part of Target 4, which is Quality Education. Point seven is Education for Sustainable Development, Global Citizenship, and a host of other really important values-based educations. So I sort of started to follow what was happening with it in policy at the same time that I was always connecting it to practice, and thinking, what can we do to support educators to take a more ethical approach?</span></div></div>
+<div class="line" data-start="204.00" data-i="4"><button class="ts" onclick="seek(204.00)" title="Jump to 3:24" aria-label="Jump to 3:24"><span class="play">▶</span>3:24</button><div class="body"><span class="spk spk-interviewer">INTERVIEWER:</span> <span class="txt">Okay, lovely. And what were any key findings from the research so far?</span></div></div>
+<div class="line" data-start="208.00" data-i="5"><button class="ts" onclick="seek(208.00)" title="Jump to 3:28" aria-label="Jump to 3:28"><span class="play">▶</span>3:28</button><div class="body"><span class="spk spk-karen">KAREN:</span> <span class="txt">Yeah, so we had a project using a really interesting, critical global citizenship education tool called Heads Up that was originally created by Professor Vanessa Andreotti in response to the Kony 2012 video, which some of us might remember was a video that was shared virally among young people all over the world, but presented a rather simplistic account of a very complex global issue. So she created the Heads Up framework as a way to kind of help us name seven patterns of oppression that we tend to reproduce in global learning, often unintentionally. So it&#x27;s hegemony, ethnocentrism, ahistoricism, depoliticization, salvationism, uncomplicated solutions, and paternalism. And those are quite complicated terms, obviously, and we&#x27;re not going to go into them. So we thought, though, that they were really important to help us just name and think through the ways that these unintentional reproductions of colonial systems of power can happen. So we put out a recruitment ad for teachers in England, Finland, and Sweden. And we worked mostly with secondary and upper secondary school teachers. And we had about 26 on the project. And we worked with Heads Up with them in all sorts of ways and just basically heard what they thought about it and whether it connected to their practice. And as it turned out, several of them got really inspired to actually use it in all sorts of different ways. And as a result of that, we produced a teacher resource that adapts Heads Up for use in the classroom. And it&#x27;s now in 14 languages. So what we found from that was that this work is possible. Of course, no teacher wants to be doing superficial approaches to global issues. We all care about the world. We all care about transforming our world with our young people. But teachers also need some support in how to do that. And that&#x27;s where we can come in as researchers, especially those of us who have taught before, to really connect the language with the pedagogy and give them a space to reflect. However, we also found out that that&#x27;s really difficult work. And teachers need time and they need support to do that work.</span></div></div>
+<div class="line" data-start="356.00" data-i="6"><button class="ts" onclick="seek(356.00)" title="Jump to 5:56" aria-label="Jump to 5:56"><span class="play">▶</span>5:56</button><div class="body"><span class="spk spk-interviewer">INTERVIEWER:</span> <span class="txt">And is there any kind of key messages that you would give to teachers and leaders — you know, from what you found and probably put in your resource — which they could go out and implement right now?</span></div></div>
+<div class="line" data-start="368.00" data-i="7"><button class="ts" onclick="seek(368.00)" title="Jump to 6:08" aria-label="Jump to 6:08"><span class="play">▶</span>6:08</button><div class="body"><span class="spk spk-karen">KAREN:</span> <span class="txt">Yeah, absolutely. I mean, everyone&#x27;s welcome to take a look at it. The resource is not a how-to, because any good pedagogy depends on the professionalism of the teacher. But it has sparked a lot of important discussions around whole school approaches to global education. And we also have seen it used a lot with environmental education. This is another project I&#x27;ve been working on around making sure that we are connecting global social justice issues with environmental issues in the ways we approach them in the schools. And there&#x27;s some really good activities in there that can help you think that through. And we have a new resource that&#x27;s just come out specifically around climate change and looking at critical theory and decolonial ideas, and how they can help us bring global social justice issues and environmental issues together in the way we approach them.</span></div></div>
+<div class="line" data-start="423.00" data-i="8"><button class="ts" onclick="seek(423.00)" title="Jump to 7:03" aria-label="Jump to 7:03"><span class="play">▶</span>7:03</button><div class="body"><span class="spk spk-interviewer">INTERVIEWER:</span> <span class="txt">How much do teachers need to know themselves in order to deliver these kind of sessions?</span></div></div>
+<div class="line" data-start="427.00" data-i="9"><button class="ts" onclick="seek(427.00)" title="Jump to 7:07" aria-label="Jump to 7:07"><span class="play">▶</span>7:07</button><div class="body"><span class="spk spk-karen">KAREN:</span> <span class="txt">That&#x27;s a good question. From our experience, teachers know a lot about this, and they care a lot about this. And by no means are we suggesting teachers have ever really been doing things wrong or right. I think it can feel like that. It can feel like, oh my gosh, I did the shoebox activity and that&#x27;s wrong. No, I mean, it was very well intended. And I think we do want our young people to be charitable. The issue is when that&#x27;s the end of global citizenship education. And so I think teachers actually know this. And hopefully research like ours and resources like ours just support them to do what they already know and think of a few ways to do things differently, or perhaps to continue what they&#x27;re doing, or stop some things that they&#x27;re doing.</span></div></div>
+<div class="line" data-start="473.00" data-i="10"><button class="ts" onclick="seek(473.00)" title="Jump to 7:53" aria-label="Jump to 7:53"><span class="play">▶</span>7:53</button><div class="body"><span class="spk spk-interviewer">INTERVIEWER:</span> <span class="txt">Do you have a useful definition of global citizenship education for our teachers who are watching just now?</span></div></div>
+<div class="line" data-start="480.00" data-i="11"><button class="ts" onclick="seek(480.00)" title="Jump to 8:00" aria-label="Jump to 8:00"><span class="play">▶</span>8:00</button><div class="body"><span class="spk spk-karen">KAREN:</span> <span class="txt">I mean, global citizenship education can mean so many different things. In fact, that&#x27;s another area that I&#x27;ve done a lot of work in, because it can mean quite reductive kind of go abroad and just have an experience — I mean, again, not a bad thing. But really what we&#x27;re looking at is, we&#x27;ve inherited a world and a set of relations in a world that are reproducing systemic inequalities, and we&#x27;re all connected to these. So we are all both part of the problem and part of the solution, albeit differently. So my approach to global citizenship education is about relationality, and connecting ourselves to people close by and far away, and taking responsibility for our part in the problems. But also realizing that young people need support, and that we need support in understanding them and what they can and can&#x27;t do. And people like us also need to take responsibility as adults to do our part.</span></div></div>
+<div class="line" data-start="545.00" data-i="12"><button class="ts" onclick="seek(545.00)" title="Jump to 9:05" aria-label="Jump to 9:05"><span class="play">▶</span>9:05</button><div class="body"><span class="spk spk-interviewer">INTERVIEWER:</span> <span class="txt">Okay. Is there anything you found surprising in your research?</span></div></div>
+<div class="line" data-start="548.00" data-i="13"><button class="ts" onclick="seek(548.00)" title="Jump to 9:08" aria-label="Jump to 9:08"><span class="play">▶</span>9:08</button><div class="body"><span class="spk spk-karen">KAREN:</span> <span class="txt">Yes, actually. I was really surprised by the teachers from England on our project, because we had teachers from England, Finland and Sweden, and arguably the teachers in England had the toughest job. Because, as you all know, there&#x27;s a very strong exam culture. And so you&#x27;re very much tied to kind of teaching things that you think are going to support young people to do well on their exam — high stakes exams. And so I thought that they might feel quite constrained in doing this work. But to the contrary, some of the best work came from the teachers from England. They used exam questions that started &quot;to what extent&quot; as a way in to really looking at multiple and multiply positioned perspectives. They really drove the first draft of this teacher resource, and found a way to use it in geography and religion and all sorts of different places across the curriculum. So I was surprised by that.</span></div></div>
+<div class="line" data-start="608.00" data-i="14"><button class="ts" onclick="seek(608.00)" title="Jump to 10:08" aria-label="Jump to 10:08"><span class="play">▶</span>10:08</button><div class="body"><span class="spk spk-interviewer">INTERVIEWER:</span> <span class="txt">Did that make you hopeful?</span></div></div>
+<div class="line" data-start="609.00" data-i="15"><button class="ts" onclick="seek(609.00)" title="Jump to 10:09" aria-label="Jump to 10:09"><span class="play">▶</span>10:09</button><div class="body"><span class="spk spk-karen">KAREN:</span> <span class="txt">Absolutely. To be honest, it&#x27;s really easy to do theorizing about this and write up papers about this, but really what I care about is every teacher is walking into a classroom every day. I mean, just this morning I heard about horrible things going on and riots. And, you know, it really does make me sad after 20 years doing this work that in some ways things don&#x27;t seem to be better. And at the same time, I know there are school leaders and teachers and parents and community members helping our young people think about these things ethically. And that is a really important action that we can all take.</span></div></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeFull()">
+  <div class="sheet">
+    <header>
+      <h2>Full transcript</h2>
+      <div class="acts">
+        <button class="primary" id="copyBtn" onclick="copyFull()">Copy all</button>
+        <button onclick="closeFull()">Close</button>
+      </div>
+    </header>
+    <div class="full" id="fullText"></div>
+  </div>
+</div>
+
+<script>
+  const STARTS = [35, 44, 134, 137, 204, 208, 356, 368, 423, 427, 473, 480, 545, 548, 608, 609];
+  const PLAIN = "INTERVIEWER: Hi, I'm talking to Professor Karen Pashby today about her research interests. So could you tell us a bit more in a nutshell about your research, Karen?\n\nKAREN: Sure. You might be familiar, as most people would be, with the Sustainable Development Goals from the United Nations. So they came in after \u2014 some of us are old enough to remember the Millennium Development Goals. The Millennium Development Goals focused on action in so-called developing countries, where the Sustainable Development Goals were really meant to be taking action all over the world and all of the UN's signatory nations to improve quality of life and sort of tackle these deep inequalities that we face. What we knew from the Millennium Development Goals was that some of the ways we were doing that type of learning in schools was actually reproducing some pretty problematic stereotypes. And we saw a lot of videos exploiting young babies in various contexts, say in Africa, who were seen as in need of help. And the idea was to encourage us all to help. And helping or being charitable in and of itself is not a problem. But when we think about it as educators, what are we teaching young people about their connection to people who have a very different lived experience from them, and how do we use these kinds of media images? And there was an opportunity then in the Sustainable Development Goals for us to try and address that, and to try and ensure schools were having a more complex and ethical way of treating global issues in the classroom.\n\nINTERVIEWER: Okay, fascinating. And what motivated you particularly to do this work?\n\nKAREN: Well, I was a secondary school teacher. I was trained in Quebec. I worked in Northern Quebec. I worked in Toronto at a school with 46 home languages. And then, similar to you, I taught in an international school in Brazil. And then I decided to go back and do my master's. And while I was doing my master's, I accessed some critical theory and concepts and languages that really helped me to make sense of those deep tensions that we feel in the classroom as a teacher when we're trying to handle some of these really important global issues. And that's when I kind of got started looking at global citizenship education, which is part of Target 4, which is Quality Education. Point seven is Education for Sustainable Development, Global Citizenship, and a host of other really important values-based educations. So I sort of started to follow what was happening with it in policy at the same time that I was always connecting it to practice, and thinking, what can we do to support educators to take a more ethical approach?\n\nINTERVIEWER: Okay, lovely. And what were any key findings from the research so far?\n\nKAREN: Yeah, so we had a project using a really interesting, critical global citizenship education tool called Heads Up that was originally created by Professor Vanessa Andreotti in response to the Kony 2012 video, which some of us might remember was a video that was shared virally among young people all over the world, but presented a rather simplistic account of a very complex global issue. So she created the Heads Up framework as a way to kind of help us name seven patterns of oppression that we tend to reproduce in global learning, often unintentionally. So it's hegemony, ethnocentrism, ahistoricism, depoliticization, salvationism, uncomplicated solutions, and paternalism. And those are quite complicated terms, obviously, and we're not going to go into them. So we thought, though, that they were really important to help us just name and think through the ways that these unintentional reproductions of colonial systems of power can happen. So we put out a recruitment ad for teachers in England, Finland, and Sweden. And we worked mostly with secondary and upper secondary school teachers. And we had about 26 on the project. And we worked with Heads Up with them in all sorts of ways and just basically heard what they thought about it and whether it connected to their practice. And as it turned out, several of them got really inspired to actually use it in all sorts of different ways. And as a result of that, we produced a teacher resource that adapts Heads Up for use in the classroom. And it's now in 14 languages. So what we found from that was that this work is possible. Of course, no teacher wants to be doing superficial approaches to global issues. We all care about the world. We all care about transforming our world with our young people. But teachers also need some support in how to do that. And that's where we can come in as researchers, especially those of us who have taught before, to really connect the language with the pedagogy and give them a space to reflect. However, we also found out that that's really difficult work. And teachers need time and they need support to do that work.\n\nINTERVIEWER: And is there any kind of key messages that you would give to teachers and leaders \u2014 you know, from what you found and probably put in your resource \u2014 which they could go out and implement right now?\n\nKAREN: Yeah, absolutely. I mean, everyone's welcome to take a look at it. The resource is not a how-to, because any good pedagogy depends on the professionalism of the teacher. But it has sparked a lot of important discussions around whole school approaches to global education. And we also have seen it used a lot with environmental education. This is another project I've been working on around making sure that we are connecting global social justice issues with environmental issues in the ways we approach them in the schools. And there's some really good activities in there that can help you think that through. And we have a new resource that's just come out specifically around climate change and looking at critical theory and decolonial ideas, and how they can help us bring global social justice issues and environmental issues together in the way we approach them.\n\nINTERVIEWER: How much do teachers need to know themselves in order to deliver these kind of sessions?\n\nKAREN: That's a good question. From our experience, teachers know a lot about this, and they care a lot about this. And by no means are we suggesting teachers have ever really been doing things wrong or right. I think it can feel like that. It can feel like, oh my gosh, I did the shoebox activity and that's wrong. No, I mean, it was very well intended. And I think we do want our young people to be charitable. The issue is when that's the end of global citizenship education. And so I think teachers actually know this. And hopefully research like ours and resources like ours just support them to do what they already know and think of a few ways to do things differently, or perhaps to continue what they're doing, or stop some things that they're doing.\n\nINTERVIEWER: Do you have a useful definition of global citizenship education for our teachers who are watching just now?\n\nKAREN: I mean, global citizenship education can mean so many different things. In fact, that's another area that I've done a lot of work in, because it can mean quite reductive kind of go abroad and just have an experience \u2014 I mean, again, not a bad thing. But really what we're looking at is, we've inherited a world and a set of relations in a world that are reproducing systemic inequalities, and we're all connected to these. So we are all both part of the problem and part of the solution, albeit differently. So my approach to global citizenship education is about relationality, and connecting ourselves to people close by and far away, and taking responsibility for our part in the problems. But also realizing that young people need support, and that we need support in understanding them and what they can and can't do. And people like us also need to take responsibility as adults to do our part.\n\nINTERVIEWER: Okay. Is there anything you found surprising in your research?\n\nKAREN: Yes, actually. I was really surprised by the teachers from England on our project, because we had teachers from England, Finland and Sweden, and arguably the teachers in England had the toughest job. Because, as you all know, there's a very strong exam culture. And so you're very much tied to kind of teaching things that you think are going to support young people to do well on their exam \u2014 high stakes exams. And so I thought that they might feel quite constrained in doing this work. But to the contrary, some of the best work came from the teachers from England. They used exam questions that started \"to what extent\" as a way in to really looking at multiple and multiply positioned perspectives. They really drove the first draft of this teacher resource, and found a way to use it in geography and religion and all sorts of different places across the curriculum. So I was surprised by that.\n\nINTERVIEWER: Did that make you hopeful?\n\nKAREN: Absolutely. To be honest, it's really easy to do theorizing about this and write up papers about this, but really what I care about is every teacher is walking into a classroom every day. I mean, just this morning I heard about horrible things going on and riots. And, you know, it really does make me sad after 20 years doing this work that in some ways things don't seem to be better. And at the same time, I know there are school leaders and teachers and parents and community members helping our young people think about these things ethically. And that is a really important action that we can all take.";
+  const SRC_HD = "C0492.mp4";
+  const SRC_4K = "";
+  const v = document.getElementById('v');
+  const lines = Array.from(document.querySelectorAll('.line'));
+  let follow = true, active = -1, is4k = false;
+
+  function setQuality(want4k) {
+    if (want4k === is4k) return;
+    const t = v.currentTime, playing = !v.paused;
+    is4k = want4k;
+    v.src = is4k ? SRC_4K : SRC_HD;
+    v.addEventListener('loadedmetadata', () => { v.currentTime = t; if (playing) v.play(); }, {once:true});
+    document.getElementById('q4K').classList.toggle('sel', is4k);
+    document.getElementById('qHD').classList.toggle('sel', !is4k);
+  }
+
+  function seek(t) { v.currentTime = t + 0.001; v.play(); }
+  function toggleFollow() {
+    follow = !follow;
+    const b = document.getElementById('follow');
+    b.textContent = 'Auto-scroll: ' + (follow ? 'on' : 'off');
+    b.classList.toggle('on', follow);
+  }
+  function idxFor(t) {
+    let lo = 0, hi = STARTS.length - 1, ans = 0;
+    while (lo <= hi) { const m = (lo+hi)>>1;
+      if (STARTS[m] <= t) { ans = m; lo = m+1; } else { hi = m-1; } }
+    return ans;
+  }
+  v.addEventListener('timeupdate', () => {
+    const i = idxFor(v.currentTime);
+    if (i !== active) {
+      if (active >= 0) lines[active].classList.remove('active');
+      lines[i].classList.add('active');
+      active = i;
+      if (follow) lines[i].scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  });
+
+  // Full transcript overlay
+  const overlay = document.getElementById('overlay');
+  document.getElementById('fullText').textContent = PLAIN;
+  function openFull() { overlay.classList.add('show'); }
+  function closeFull() { overlay.classList.remove('show'); }
+  async function copyFull() {
+    const btn = document.getElementById('copyBtn');
+    try { await navigator.clipboard.writeText(PLAIN); }
+    catch (e) {
+      const r = document.createRange(); r.selectNodeContents(document.getElementById('fullText'));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      try { document.execCommand('copy'); } catch (_) {}
+      s.removeAllRanges();
+    }
+    btn.textContent = 'Copied ✓';
+    setTimeout(() => btn.textContent = 'Copy all', 1600);
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFull(); });
+</script>
+</body>
+</html>
